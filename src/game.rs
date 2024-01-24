@@ -1,6 +1,6 @@
 use crate::hands::Hand;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum GameOutcome {
     Win,
     Lose,
@@ -44,5 +44,25 @@ impl GameRound {
             GameRound {comp: Hand::Scissors, player: Hand::Rock} => GameOutcome::Win,
             GameRound {comp: Hand::Scissors, player: Hand::Scissors} => GameOutcome::Draw,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::Hand::*;
+    use super::GameRound;
+    use super::GameOutcome::*;
+
+    #[test]
+    fn play_game() {
+        assert_eq!(GameRound::new(Rock, Paper).play_game(), Win);
+        assert_eq!(GameRound::new(Rock, Scissors).play_game(), Lose);
+        assert_eq!(GameRound::new(Rock, Rock).play_game(), Draw);
+        assert_eq!(GameRound::new(Paper, Scissors).play_game(), Win);
+        assert_eq!(GameRound::new(Paper, Rock).play_game(), Lose);
+        assert_eq!(GameRound::new(Paper, Paper).play_game(), Draw);
+        assert_eq!(GameRound::new(Scissors, Rock).play_game(), Win);
+        assert_eq!(GameRound::new(Scissors, Paper).play_game(), Lose);
+        assert_eq!(GameRound::new(Scissors, Scissors).play_game(), Draw);
     }
 }
