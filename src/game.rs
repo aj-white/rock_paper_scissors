@@ -32,20 +32,18 @@ impl GameRound {
 
     pub fn play_game(&self) -> GameOutcome {
         match *self {
-            GameRound {comp: Hand::Rock, player: Hand::Scissors} => GameOutcome::Lose,
-            GameRound {comp: Hand::Rock, player: Hand::Paper} => GameOutcome::Win,
-            GameRound {comp: Hand::Rock, player: Hand::Rock} => GameOutcome::Draw,
-
-            GameRound {comp: Hand::Paper, player: Hand::Rock} => GameOutcome::Lose,
-            GameRound {comp: Hand::Paper, player: Hand::Scissors} => GameOutcome::Win,
-            GameRound {comp: Hand::Paper, player: Hand::Paper} => GameOutcome::Draw,
-
-            GameRound {comp: Hand::Scissors, player: Hand::Paper} => GameOutcome::Lose,
-            GameRound {comp: Hand::Scissors, player: Hand::Rock} => GameOutcome::Win,
-            GameRound {comp: Hand::Scissors, player: Hand::Scissors} => GameOutcome::Draw,
+            Self {comp: Hand::Rock, player: Hand::Scissors} => GameOutcome::Lose,
+            Self {comp: Hand::Rock, player: Hand::Paper} => GameOutcome::Win,
+            Self {comp: Hand::Paper, player: Hand::Rock} => GameOutcome::Lose,
+            Self {comp: Hand::Paper, player: Hand::Scissors} => GameOutcome::Win,
+            Self {comp: Hand::Scissors, player: Hand::Paper} => GameOutcome::Lose,
+            Self {comp: Hand::Scissors, player: Hand::Rock} => GameOutcome::Win,
+            _ => GameOutcome::Draw,
         }
     }
 }
+
+
 
 #[cfg(test)]
 mod tests {
